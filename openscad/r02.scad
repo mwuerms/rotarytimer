@@ -26,9 +26,9 @@ module part2_RotaryHandle(loc_res = 32, see_into = 1) {
     difference() {
         hull() {
             translate([0, 0, 0])
-            cylinder(d = 50, h = 13.7-2.5-.8, $fn= 16);
+            cylinder(d = 50, h = 12.7-2.5-.8, $fn= 16);
             translate([0, 0, 0])
-            cylinder(d = 45, h = 13.7-1.8, $fn = loc_res);
+            cylinder(d = 45, h = 12.7-1.8, $fn = loc_res);
         }
         // middle/axis cutout
         translate([0, 0, -1])
@@ -74,6 +74,55 @@ module part4_LightRing(loc_res = 32) {
         // do not use for a start: champfer to direct light
         *translate([0, 0, -1])
         cylinder(d2 = 32, d1 = 32+15, h = 3+1, $fn = loc_res);
+    }
+}
+
+module part5_Bottom(loc_res = 32) {
+    difference() {
+        hull() {
+            translate([0, 0, 0])
+            cylinder(d = 50-1, h = 12, $fn= loc_res);
+            translate([0, 0, 0.5])
+            cylinder(d = 50, h = 11.5, $fn= loc_res);
+        }
+        translate([0, 0, 1])
+        hull() {
+            translate([0, 0, 0])
+            cylinder(d = 50-1-2, h = 12, $fn= loc_res);
+            translate([0, 0, 0.5])
+            cylinder(d = 50-2, h = 12, $fn= loc_res);
+        }
+        hull() {
+            translate([2, 28, 2])
+            rotate([90, 0, 0])
+            cylinder(d = 2, h = 10, $fn = loc_res);
+            translate([-2, 28, 2])
+            rotate([90, 0, 0])
+            cylinder(d = 2, h = 10, $fn = loc_res);
+        }
+        // addon connector cut out
+        translate([0, -18, -1])
+        hull() {
+            translate([-3/2*2.54, 0, 0])
+            cylinder(d = 2, h = 3, $fn = loc_res);
+            translate([+3/2*2.54, 0, 0])
+            cylinder(d = 2, h = 3, $fn = loc_res);
+        }
+    }
+    // addon connector
+    *translate([0, -18, -1]) {
+        translate([-7, 0, 0])
+        cylinder(d = 3, h = 3, $fn = loc_res);
+        translate([-3/2*2.54, 0, 0])
+        cylinder(d = 1.5, h = 3, $fn = loc_res);
+        translate([-1/2*2.54, 0, 0])
+        cylinder(d = 1.5, h = 3, $fn = loc_res);
+        translate([+1/2*2.54, 0, 0])
+        cylinder(d = 1.5, h = 3, $fn = loc_res);
+        translate([+3/2*2.54, 0, 0])
+        cylinder(d = 1.5, h = 3, $fn = loc_res);
+        translate([7, 0, 0])
+        cylinder(d = 3, h = 3, $fn = loc_res);
     }
 }
 
@@ -153,11 +202,11 @@ module pcbR04(loc_res = 32) {
 
 // - put it all together ------------------------------------
 module puttogether() {
-    translate([0, 0, 16+1.6])
+    translate([0, 0, 15+1.6])
     part1_DisplayCover();
-    
-    translate([0, 0, 16])
+    translate([0, 0, 15])
     pcbR01();
+    // no part3 between pcbR01() and rotaryEVQ_V5B00215B()
     
     translate([0, 0, 6.1+1.8])
     part2_RotaryHandle();
@@ -179,6 +228,9 @@ module puttogether() {
     // because it will be printed transparent
     %translate([0, 0, 0])
     part4_LightRing();
+    
+    translate([0, 0, -12])
+    part5_Bottom();
 }
 puttogether();
 
@@ -188,3 +240,4 @@ puttogether();
 //translate([0, 0, 6.1+1.8])
 *part2_RotaryHandle(256, 0);
 *part4_LightRing(256);
+*part5_Bottom(256);
