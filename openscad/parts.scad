@@ -36,6 +36,43 @@ module oled1_28ZollRound(loc_res = 32) {
     }
 }
 
+module buttonPTS526SK_SMTR2(loc_res = 32, h1 = 1.5) {
+    // button
+    color("Gold")
+    translate([0, 0, 0])
+    cylinder(d = 2, h = h1, $fn = loc_res);
+    // leads
+    color("Silver") {
+        translate([-6.4/2, -3.7/2-0.5/2, 0])
+        cube([6.4, 0.5, 0.1]);
+        translate([-6.4/2, 3.7/2-0.5/2, 0])
+        cube([6.4, 0.5, 0.1]);
+    }
+    // body
+    color("Black")
+    hull() {
+        translate([-5.2/2, -2.6/2, 0])
+        cube([5.2, 2.6, 0.9]);
+        translate([-2.6/2, -5.2/2, 0])
+        cube([2.6, 5.2, 0.9]);
+    }
+    color("Silver")
+    hull() {
+        translate([-5.2/2, -2.6/2, 0.9])
+        cube([5.2, 2.6, 0.1]);
+        translate([-2.6/2, -5.2/2, 0.9])
+        cube([2.6, 5.2, 0.1]);
+    }
+    // middle part
+    color("Silver")
+    translate([0, 0, 1])
+    cylinder(d1 = 4, d2 = 3.5, h = 0.15, $fn = loc_res);
+}
+
+module buttonPTS526SK15SMTR2(loc_res = 32) {
+    buttonPTS526SK_SMTR2(loc_res, 1.5);
+}
+
 module led0505(loc_res = 32) {
     difference() {
         union() {

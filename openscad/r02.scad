@@ -66,24 +66,7 @@ module part4_LightRing(loc_res = 32) {
 }
 
 
-
 module pcbR01(loc_res = 32, show = 1) {
-    if(show) {
-        rled = 18;
-        nbleds = 8;
-        translate([0, 0, 1.6])
-        for(n = [0:1:nbleds-1]) {
-            translate([rled*cos(360/nbleds*n), rled*sin(360/nbleds*n), 0])
-            rotate([0, 0, 360/nbleds*n])
-            ledSK6812();
-        }
-    }
-    color("Green")
-    translate([0, 0, 0])
-    cylinder(d = 44, h = 1.6, $fn = loc_res);
-}
-
-module pcbR02(loc_res = 32, show = 1) {
     if(show) {
         translate([0, 0, 1.6])
         oled1_28ZollRound();
@@ -103,25 +86,47 @@ module pcbR02(loc_res = 32, show = 1) {
     }
 }
 
+module pcbR02(loc_res = 32, show = 1) {
+    if(show) {
+        rled = 18;
+        nbleds = 8;
+        translate([0, 0, 0])
+        for(n = [0:1:nbleds-1]) {
+            translate([rled*cos(360/nbleds*n), rled*sin(360/nbleds*n), 0])
+            rotate([0, 180, 360/nbleds*n])
+            ledSK6812();
+        }
+    }
+    color("Green")
+    difference() {
+        translate([0, 0, 0])
+        cylinder(d = 44, h = 1.6, $fn = loc_res);
+        translate([0, 0, -1])
+        cylinder(d = 23, h = 1.6+2, $fn = loc_res);
+    }
+}
+
+
+
 module puttogether() {
-    translate([0, 0, 16+1.6])
+    *translate([0, 0, 16+1.6])
     part1_DisplayCover();
     
-    translate([0, 0, 16])
-    pcbR02();
+    *translate([0, 0, 16])
+    pcbR01();
     
-    translate([0, 0, 6.1])
+    *translate([0, 0, 6.1])
     part2_RotaryHandle();
     
     translate([0, 0, 0])
     rotaryEVQ_V5B00215B();
     
-    translate([0, 0, -1.6])
-    pcbR01();
+    translate([0, 0, 6])
+    pcbR02();
     
     // use % for transparency
     // because it will be printed transparent
-    % translate([0, 0, 0])
+    *% translate([0, 0, 0])
     part4_LightRing();
 }
 puttogether();
