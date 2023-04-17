@@ -11,9 +11,9 @@ module rotaryEVQ_V5B00215B(loc_res = 32) {
             cylinder(d = 21.9, h = 15, $fn = loc_res);
             color("DarkGray") {
                 translate([0, 0, 0])
-                cylinder(d = 27.5, h = 6, $fn = loc_res);
-                translate([-12/2, -28/2, 0])
-                cube([12, 28, 6]);
+                cylinder(d = 26.5, h = 6, $fn = loc_res);
+                translate([-14/2, -28/2, 0])
+                cube([14, 28, 6]);
                 translate([-28/2, -2.5/2, 0])
                 cube([28, 2.5, 6]);
             }
@@ -23,6 +23,8 @@ module rotaryEVQ_V5B00215B(loc_res = 32) {
     }
 }
 
+//rotaryEVQ_V5B00215B();
+
 module oled1_28ZollRound(loc_res = 32) {
     color("White")
     translate([0, 0, 0.1])
@@ -31,10 +33,11 @@ module oled1_28ZollRound(loc_res = 32) {
     hull() {
         translate([0, 0, 0])
         cylinder(d = 35.6, h = 1.5, $fn = loc_res);
-        translate([-10/2, -38.1/2, 0])
-        cube([10, 10, 1.5]);
+        translate([-14/2, -38.1/2, 0])
+        cube([14, 10, 1.5]);
     }
 }
+oled1_28ZollRound();
 
 module buttonPTS526SK_SMTR2(loc_res = 32, h1 = 1.5) {
     // button
@@ -96,7 +99,4 @@ module ledWS2812B(loc_res = 32) {
 module ledSK6812(loc_res = 32) {
     led0505(loc_res);
 }
-
-//rotaryEVQ_V5B00215B();
-//oled1_28ZollRound();
-//ledWS2812B();
+///ledSK6812();

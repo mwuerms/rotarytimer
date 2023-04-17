@@ -9,12 +9,12 @@ use<parts.scad>
 module part1_DisplayCover(loc_res) {
     difference() {
         translate([0, 0, 0])
-        cylinder(d = 42, h = 1.8+0.4, $fn = loc_res);
+        cylinder(d = 43, h = 1.8+0.4, $fn = loc_res);
         hull() {
             translate([0, 0, -0.5])
             cylinder(d = 36, h = 1.8+0.5, $fn = loc_res);
-            translate([-10.6/2, -40/2, -0.5])
-            cube([10.6, 10, 1.8+0.5]);
+            translate([-14.6/2, -40/2, -0.5])
+            cube([14.6, 10, 1.8+0.5]);
         }
         translate([0, 0, -1])
         cylinder(d = 35, h = 1.6+1.8+1, $fn = loc_res);
@@ -31,11 +31,17 @@ module part2_RotaryHandle(loc_res = 32, see_into = 1) {
             cylinder(d = 45, h = 12.7-1.8, $fn = loc_res);
         }
         // middle/axis cutout
-        translate([0, 0, -1])
-        cylinder(d = 22, h = 15, $fn = loc_res);
+        difference() {
+            translate([0, 0, -1])
+            cylinder(d = 22, h = 15, $fn = loc_res);
+            translate([20.8/2, -2.2/2, -2])
+            cube([2, 2.2, 15+3]);
+            translate([-20.8/2-2, -2.2/2, -2])
+            cube([2, 2.2, 15+3]);
+        }
         // upper display cutout
         translate([0, 0, 15-6-1.8])
-        cylinder(d = 42.4, h = 10, $fn = loc_res);
+        cylinder(d = 43.4, h = 10, $fn = loc_res);
         // lower cutout for buttons + slip ring (pcbR03)
         translate([0, 0, -1])
         cylinder(d = 35, h = 1+1.6+1.2, $fn = loc_res);
@@ -49,6 +55,7 @@ module part2_RotaryHandle(loc_res = 32, see_into = 1) {
             cube(40);
         }
     }
+    
 }
 
 module part4_LightRing(loc_res = 32) {
@@ -65,14 +72,14 @@ module part4_LightRing(loc_res = 32) {
         cylinder(d = 44.2, h = 1.6+1+1.6, $fn = loc_res);
         // middle cutout
         translate([0, 0, -1])
-        cylinder(d = 29, h = 1.6+1+6+1, $fn = loc_res);
-        translate([-12.6/2, -28.6/2, -0.5])
-        cube([12.6, 28.6, 6+1]);
+        cylinder(d = 29.5, h = 1.6+1+6+1, $fn = loc_res);
+        translate([-14.6/2, -29.6/2, -0.5])
+        cube([14.6, 29.6, 6+1]);
         translate([-28.6/2, -(2.5+.6)/2, -0.5])
         cube([28.6, 2.5+.6, 6+1]);
         
         // do not use for a start: champfer to direct light
-        *translate([0, 0, -1])
+        translate([0, 0, -1])
         cylinder(d2 = 32, d1 = 32+15, h = 3+1, $fn = loc_res);
     }
 }
@@ -232,12 +239,12 @@ module puttogether() {
     translate([0, 0, -12])
     part5_Bottom();
 }
-puttogether();
+*puttogether();
 
 // test/print parts
 //translate([0, 0, 16+1.6])
 *part1_DisplayCover(256);
 //translate([0, 0, 6.1+1.8])
-*part2_RotaryHandle(256, 0);
+part2_RotaryHandle(256, 0);
 *part4_LightRing(256);
 *part5_Bottom(256);
