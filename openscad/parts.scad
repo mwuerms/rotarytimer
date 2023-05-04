@@ -22,7 +22,6 @@ module rotaryEVQ_V5B00215B(loc_res = 32) {
         cylinder(d = 17.6, h = 15+2, $fn = loc_res);
     }
 }
-
 //rotaryEVQ_V5B00215B();
 
 module oled1_28ZollRound(loc_res = 32) {
@@ -37,7 +36,7 @@ module oled1_28ZollRound(loc_res = 32) {
         cube([14, 10, 1.5]);
     }
 }
-oled1_28ZollRound();
+//oled1_28ZollRound();
 
 module buttonPTS526SK_SMTR2(loc_res = 32, h1 = 1.5) {
     // button
@@ -99,4 +98,17 @@ module ledWS2812B(loc_res = 32) {
 module ledSK6812(loc_res = 32) {
     led0505(loc_res);
 }
-///ledSK6812();
+ledSK6812();
+module ledSK6812_cutout(loc_res = 32, cut_hi = 1.7+1) {
+    hull() {
+        translate([+5/2, +5/2, -1])
+        cylinder(d = 1.2, h = cut_hi, $fn = loc_res);
+        translate([+5/2, -5/2, -1])
+        cylinder(d = 1.2, h = cut_hi, $fn = loc_res);
+        translate([-5/2, +5/2, -1])
+        cylinder(d = 1.2, h = cut_hi, $fn = loc_res);
+        translate([-5/2, -5/2, -1])
+        cylinder(d = 1.2, h = cut_hi, $fn = loc_res);
+    }
+}
+ledSK6812_cutout();
