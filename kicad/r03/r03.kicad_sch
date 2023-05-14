@@ -1,0 +1,41 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid c886117b-523f-45ec-8dd9-7a358aad202b)
+
+  (paper "A4")
+
+  (title_block
+    (title "r03 Overview")
+    (date "2023-05-14")
+    (rev "a")
+    (company "MEgliDevelopment")
+  )
+
+  (lib_symbols
+  )
+
+
+  (sheet (at 129.54 38.1) (size 57.15 44.45) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid 2dbc681d-8f62-4bc9-b13a-b49634d4ab01)
+    (property "Sheetname" "r03pcb1" (at 129.54 37.3884 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "r03pcb1.kicad_sch" (at 129.54 83.1346 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (property "Field2" "" (at 129.54 38.1 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (instances
+      (project "r03"
+        (path "/c886117b-523f-45ec-8dd9-7a358aad202b" (page "2"))
+      )
+    )
+  )
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
+)
